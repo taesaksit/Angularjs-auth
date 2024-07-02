@@ -16,21 +16,15 @@ $username = $data->username;
 $password = $data->password;
 $response = array();
 
-$check_username = "SELECT username FROM users WHERE username = '{$username}'";
+$check_username = "SELECT username FROM users 
+WHERE username = '{$username}' AND password = '{$password}'";
 $check_username_result = $conn->query($check_username);
 
-if ($check_username_result->num_rows > 0) {
-    
-    $response['data'] = 'username already exits';
+if ($check_username_result->num_rows > 0 ) {
+    $response['success'] = 'Login success';
+
 } else {
-
-    $sql = "INSERT INTO users (username , password)  VALUES ('{$username}','{$password}') ";
-    if ($conn->query($sql)) {
-        $response['data'] = "Register Successfully";
-    } else {
-        $response['data'] = "Insert faild";
-    }
-
+    $response['faild'] = 'username or password invalid';
 }
 
 echo json_encode($response);
