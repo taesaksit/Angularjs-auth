@@ -1,14 +1,14 @@
 var registerApp = angular.module('registerApp' , []);
 registerApp.controller('registerCtrl' , function($scope , $http){
-    $scope.errorMessage = '';
-    $scope.successMessage = '';
+   
 
     $scope.user = {}
 
     $scope.registerSubmit = function(){
 
-
-
+        $scope.errorMessage = '';
+        $scope.successMessage = '';
+        
          var regex = /^[a-zA-Z0-9]+$/;
          if (!regex.test($scope.user.username) || !regex.test($scope.user.password)) {
             $scope.errorMessage = 'Username and password must contain only letters (a-z) and numbers (0-9).';
