@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,8 @@
     <title>Index</title>
 </head>
 <body>
-    <h4>Welcome to website</h4>
+    <h1><?php echo $_SESSION['welcome']?></h1>
+    <h1>Welcome to website</h1>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut et eveniet minima sequi maxime alias reprehenderit cum repellat qui fugiat.</p>
      
     <div class="card">

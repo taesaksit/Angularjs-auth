@@ -1,5 +1,16 @@
 <?Php
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+
+session_start();
+if (!isset($_SESSION['username'])){
+    header("location: ../login/login.html");
+}   
+
+
 $data = json_decode(file_get_contents("php://input"));
 
 $dbhost = "localhost";
@@ -22,6 +33,7 @@ $check_username_result = $conn->query($check_username);
 
 if ($check_username_result->num_rows > 0 ) {
     $response['success'] = 'Login success';
+    $_SESSION['username'] = 'Checkuser';
 
 } else {
     $response['faild'] = 'username or password invalid';

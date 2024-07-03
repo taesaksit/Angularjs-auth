@@ -26,13 +26,12 @@ registerApp.controller('registerCtrl', function ($scope, $http) {
         if (!regex.test($scope.user.username) || !regex.test($scope.user.password)) {
             $scope.errorMessage = 'Username and password must contain only letters (a-z) and numbers (0-9).';
             console.log($scope.user.password)
-
             return;
         }
       
 
         $http({
-            method: 'post',
+            method: 'POST',
             url: 'register.php',
             Headers: '',
             data: $scope.user

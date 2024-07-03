@@ -1,5 +1,9 @@
 <?Php
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
 $data = json_decode(file_get_contents("php://input"));
 
 $dbhost = "localhost";
@@ -16,26 +20,25 @@ $username = $data->username;
 $password = $data->password;
 $response = array();
 
-$check_username = "SELECT username FROM users WHERE username = '{$username}'";
-$check_username_result = $conn->query($check_username);
-
-if ($check_username_result->num_rows > 0) {
-    
-    $response['data'] = 'username already exits';
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header('location: register.html');
 } else {
+    $check_username = "SELECT username FROM users WHERE username = '{$username}'";
+    $check_username_result = $conn->query($check_username);
 
-    $sql = "INSERT INTO users (username , password)  VALUES ('{$username}','{$password}') ";
-    if ($conn->query($sql)) {
-        $response['data'] = "Register Successfully";
+    if ($check_username_result->num_rows > 0) {
+        $response['data'] = 'username already exits';
     } else {
-        $response['data'] = "Insert faild";
-    }
 
+        $sql = "INSERT INTO users (username , password)  VALUES ('{$username}','{$password}') ";
+
+        if ($conn->query($sql)) {
+            $response['data'] = "Register Successfully";
+        } else {
+            $response['data'] = "Insert faild";
+        }
+    }
 }
 
 echo json_encode($response);
 $conn->close();
-
-
-
-?>
