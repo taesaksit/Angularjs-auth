@@ -21,7 +21,9 @@ $password = $data->password;
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header('location: register.html');
+    header('location: index.php');
+    exit();
+
 } else {
     $check_username = "SELECT username FROM users WHERE username = '{$username}'";
     $check_username_result = $conn->query($check_username);

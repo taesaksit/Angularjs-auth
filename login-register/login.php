@@ -1,13 +1,14 @@
 <?Php
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 
-session_start();
+
 if (!isset($_SESSION['username'])){
-    header("location: ../login/login.html");
+    header("location: index.php");
 }   
 
 
@@ -27,13 +28,14 @@ $username = $data->username;
 $password = $data->password;
 $response = array();
 
-$check_username = "SELECT username FROM users 
-WHERE username = '{$username}' AND password = '{$password}'";
+$check_username = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}'";
 $check_username_result = $conn->query($check_username);
 
 if ($check_username_result->num_rows > 0 ) {
+    $user = $check_username_result->fetch_assoc();
+    $_SESSION['user_id']= $user['user_id'];
+    $_SESSION['username'] = $user['username'];
     $response['success'] = 'Login success';
-    $_SESSION['username'] = 'Checkuser';
 
 } else {
     $response['faild'] = 'username or password invalid';
