@@ -1,11 +1,9 @@
 var loginregisterApp = angular.module("loginregisterApp", []);
 
-
 loginregisterApp.controller("registerCtrl", function ($scope, $http) {
   $scope.user = {};
- 
-  $scope.registerSubmit = function () {
 
+  $scope.registerSubmit = function () {
     $scope.errorMessage = "";
     $scope.successMessage = "";
     var regex = /^[a-zA-Z0-9]+$/;
@@ -26,7 +24,8 @@ loginregisterApp.controller("registerCtrl", function ($scope, $http) {
       !regex.test($scope.user.username) ||
       !regex.test($scope.user.password)
     ) {
-      $scope.errorMessage = "Username and password must contain only letters (a-z) and numbers (0-9).";
+      $scope.errorMessage =
+        "Username and password must contain only letters (a-z) and numbers (0-9).";
 
       return;
     }
@@ -45,17 +44,12 @@ loginregisterApp.controller("registerCtrl", function ($scope, $http) {
       }
     );
   };
-
-
 });
 
-loginregisterApp.controller("loginCtrl", function ($scope, $http, $window, $timeout) {
-  
+loginregisterApp.controller("loginCtrl", function ($scope, $http, $window) {
   $scope.user = {};
- 
 
   $scope.loginSubmit = function () {
-
     $scope.errorMessage = "";
     $scope.successMessage = "";
 
@@ -64,32 +58,39 @@ loginregisterApp.controller("loginCtrl", function ($scope, $http, $window, $time
       $scope.errorMessage = "Username or password undefiend.";
       return;
     }
-    if (!regex.test($scope.user.username) || !regex.test($scope.user.password)) {
-      $scope.errorMessage ="Username and password must contain only letters (a-z) and numbers (0-9).";
+    if (
+      !regex.test($scope.user.username) ||
+      !regex.test($scope.user.password)
+    ) {
+      $scope.errorMessage =
+        "Username and password must contain only letters (a-z) and numbers (0-9).";
       return;
     }
 
     $http({
-      method: "post",
-      url: "login.php",
-      Headers: "",
+      method: "POST",
+      url: "login.php", // เปลี่ยน URL นี้เป็น URL ของ API ที่ต้องการใช้งาน
       data: $scope.user,
     }).then(
-      function successCallback(response) {
+      function successCallback (response) {
         if (response.data.success) {
-          $scope.successMessage = response.data.success;
+            console.log($scope.successMessage)
+            Swal.fire({
+              title: response.data.success,
+              text: "",
+              icon: "success"
+            })
+            .then(()=>{
+              $window.location.href = '../pages/index.php';
+            });
 
-          $timeout (()=>{
-            $window.location.href = '../index.php';
-          },1000)
+        }else{
+            $scope.errorMessage = response.data.error
+            console.log($scope.errorMessage)
 
-        } else {
-          $scope.errorMessage = response.data.faild;
         }
       },
-      function errorCallback(response) {
-        console.log(response);
-      }
+      function errorCallback(response) { console.log(response)}
     );
   };
 });

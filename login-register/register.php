@@ -1,27 +1,14 @@
 <?Php
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+include("../condb.php");
 
 $data = json_decode(file_get_contents("php://input"));
-
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "authen";
-$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-
-if ($conn->connect_error) {
-    die("" . $conn->connect_error);
-}
-
 $username = $data->username;
 $password = $data->password;
 $response = array();
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header('location: index.php');
+    header('location: indexlogin.php');
     exit();
 
 } else {
@@ -44,3 +31,5 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 echo json_encode($response);
 $conn->close();
+
+
