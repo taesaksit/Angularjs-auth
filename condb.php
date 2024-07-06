@@ -1,4 +1,8 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+    header('location: pages/index.php');
+    exit;
+}
 
 $dbhost = "localhost";
 $dbuser = "root";

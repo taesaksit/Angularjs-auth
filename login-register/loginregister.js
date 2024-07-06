@@ -37,7 +37,11 @@ loginregisterApp.controller("registerCtrl", function ($scope, $http) {
       data: $scope.user,
     }).then(
       function successCallback(response) {
-        $scope.successMessage = response.data.data;
+        if (response.data.success){
+          $scope.successMessage = response.data.data;
+        }else{
+          $scope.errorMessage = response.data.data;
+        }
       },
       function errorCallback(response) {
         console.log(response);

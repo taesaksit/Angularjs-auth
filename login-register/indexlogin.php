@@ -18,7 +18,7 @@
 
 <body>
 
-    <div class="container  mt-3">
+    <div class="container  mt-3 col-md-7">
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">

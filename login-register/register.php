@@ -1,6 +1,6 @@
 <?Php
 
-include("../condb.php");
+require("../condb.php");
 
 $data = json_decode(file_get_contents("php://input"));
 $username = $data->username;
