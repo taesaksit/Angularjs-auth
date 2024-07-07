@@ -38,7 +38,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
 
     <?php require 'navbar.php'; ?>
 
-  
+
 
     <div class="row d-flex justify-content-center mt-5">
         <div class="col-md-8">
@@ -51,6 +51,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
                             <th>Price</th>
                             <th>Unit</th>
                             <th>Category</th>
+                            <th>CategoryId</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -62,10 +63,11 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
                             <td>{{data.product_price}}</td>
                             <td>{{data.product_unit}}</td>
                             <td>{{data.category_name}}</td>
-                            <td><button class="btn btn-sm btn-warning" ng-click="editCategory(data)">Edit</button></td>
-                            <td><button class="btn btn-sm btn-danger" ng-click="deleteCategory(data)">Del</button></td>
+                            <td>{{data.category}}</td>
+                            <td><button class="btn btn-sm btn-warning" ng-click="editProduct(data)">Edit</button></td>
+                            <td><button class="btn btn-sm btn-danger" ng-click="deleteProduct(data)">Del</button></td>
                         </tr>
-                        <button type="button" class="btn btn-primary" ng-click="productSubmit()" >Add Product</button>
+                        <button type="button" class="btn btn-primary" ng-click="productSubmit()">Add Product</button>
                 </table>
             </div>
         </div>
@@ -74,7 +76,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal Add-->
     <div class="modal fade" id="formProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -102,6 +104,44 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
                             <select class="form-select" ng-model="product.category" required>
                                 <option value="">--Select an option--</option>
                                 <option ng-repeat="data in category_array" ng-value="data.category_id">{{data.category_name}}</option>
+
+                            </select>
+                        </div>
+                        <button class="btn btn-sm btn-primary my-2" type="submit">Save</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal edit -->
+    <div class="modal fade" id="formProductEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ADD Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="" ng-submit="editProduct()">
+                        <div class="mb-2">
+                            <label for="" class="form-label">ProductName</label>
+                            <input class="form-control" type="text" required ng-modal="productUpdate.name" ng-value="productUpdate.name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Price</label>
+                            <input class="form-control" type="number" min="1" required ng-modal="productUpdate.price" ng-value="productUpdate.price">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Unit</label>
+                            <input class="form-control" type="number" min="1" required ng-modal="productUpdate.unit" ng-value="productUpdate.unit">
+                        </div>
+                        <div class="mb-2" ng-init="getCategory()">
+                            <label for="" class="form-label">Category</label>
+                            <select class="form-select" required ng-model="productUpdate.category">
+                                <option value="">--Select an option--</option>
+                                <option ng-repeat="data in category_array" ng-value="data.category_id" ng-selected="data.category_id == productUpdate.category">{{data.category_name}}</option>
 
                             </select>
                         </div>

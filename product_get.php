@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('location: indexlogin.php');
     exit();
 } else {
-    $sql = "SELECT product_id , product_name , product_price , product_unit , category_name
+    $sql = "SELECT product_id , product_name , product_price , product_unit , category_name , category
             FROM product
             INNER JOIN categories ON product.category = categories.category_id;";
     $result = $conn->query($sql);
