@@ -6,7 +6,7 @@ product.controller("productCtrl", function ($scope, $http, $timeout) {
 
     var formProduct = new bootstrap.Modal(document.getElementById('formProduct'));
     var formProductEdit = new bootstrap.Modal(document.getElementById('formProductEdit'));
-
+    $scope.test = '@#'
     
 
     $scope.getCategory = function () {
@@ -162,7 +162,7 @@ product.controller("productCtrl", function ($scope, $http, $timeout) {
     };
 
 
-
+   
 
 
 
