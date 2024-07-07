@@ -85,7 +85,7 @@ loginregisterApp.controller("loginCtrl", function ($scope, $http, $window) {
               icon: "success"
             })
             .then(()=>{
-              $window.location.href = '../pages/index.php';
+              $window.location.href = '../index.php';
             });
 
         }else{

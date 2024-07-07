@@ -1,7 +1,7 @@
 <?Php
 session_start();
 
-require("../condb.php");
+require("condb.php");
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -9,10 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('location: indexlogin.php');
     exit();
 } else {
-    $product_type = $data->name;
+    $category = $data->name;
     $response = array();
 
-    $sql = "INSERT INTO product_type (type_name) VALUES ('{$product_type}')";
+    $sql = "INSERT INTO categories (category_name) VALUES ('{$category}')";
     if ($conn->query(($sql))){
         $response['success'] = 'Product type saved successfully!';
     } else {

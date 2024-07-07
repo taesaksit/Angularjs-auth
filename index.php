@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
-  header("location: ../login-register/indexlogin.php");
+  header("location: login-register/indexlogin.php");
   exit();
 }
 ?>
@@ -24,8 +24,8 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
 
   <?php include 'navbar.php';?>
 
-  <h4 class="text-center mt-5">Product</h4>
-
+  <h4 class="text-center mt-5">Dashboard</h4>
+  <a ng-href="#home">Home</a>
 
 
 

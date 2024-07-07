@@ -1,7 +1,7 @@
 <?Php
 session_start();
 
-require("../condb.php");
+require("condb.php");
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('location: indexlogin.php');
     exit();
 } else {
-    $sql = "SELECT * FROM product_type";
+    $sql = "SELECT * FROM categories";
     $result = $conn->query($sql);
     $product_type = [];
     if ($result->num_rows > 0) {
