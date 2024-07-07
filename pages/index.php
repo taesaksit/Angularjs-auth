@@ -24,7 +24,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
 
   <?php include 'navbar.php';?>
 
-  
+  <h4 class="text-center mt-5">Product</h4>
 
 
 
