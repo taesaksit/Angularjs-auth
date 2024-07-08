@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
-    header("location: ../login-register/indexlogin.php");
+    header("location: login-register/indexlogin.php");
     exit();
 }
 ?>
@@ -30,16 +30,17 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
     <?php require 'navbar.php'; ?>
 
  
-    <div class="row shadow">
+    <div class="row shadow shadow p-3 mt-2">
         <div class="col-md-4">
           <canvas id="myBarChart" ng-init="barCharts()"></canvas>
         </div>
         <div class="col-md-4 "> 
-          <canvas id="myPieChart" ng-init="pieCharts()" ></canvas>
-     </div> 
+          <canvas id="myPieChart"  ></canvas>
+        </div>       
     </div>
-  
 
+    <button class="btn btn-primary" ng-click="getPie()">Click</button>
+ 
 </body>
 
 </html>

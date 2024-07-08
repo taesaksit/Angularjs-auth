@@ -9,10 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('location: indexlogin.php');
     exit();
 } else {
-    $sql = "SELECT * FROM categories";
+    $sql = "SELECT * FROM product";
     $result = $conn->query($sql);
     $product_type = [];
     if ($result->num_rows > 0) {
+
         while ($row = $result->fetch_assoc()) {
             $product_type[] = $row;
         }
