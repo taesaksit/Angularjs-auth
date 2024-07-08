@@ -6,7 +6,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
 
 $dbhost = "localhost";
 $dbuser = "root";
-$dbpass = "root";
+$dbpass = "";
 $dbname = "authen";
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 

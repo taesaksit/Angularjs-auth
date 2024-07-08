@@ -7,6 +7,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
+
+
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#"><i class="bi bi-person-check "></i> <?php echo $_SESSION['username']?></a>

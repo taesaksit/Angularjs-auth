@@ -31,15 +31,17 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
 
  
     <div class="row shadow shadow p-3 mt-2">
-        <div class="col-md-4">
-          <canvas id="myBarChart" ng-init="barCharts()"></canvas>
-        </div>
-        <div class="col-md-4 "> 
+  
+        <div class="col-md-12 "> 
           <canvas id="myPieChart"  ></canvas>
-        </div>       
+        </div>      
+        <div class="col-md-12 "> 
+          <canvas id="myPieChart2"  ></canvas>
+        </div>   
     </div>
 
-    <button class="btn btn-primary" ng-click="getPie()">Click</button>
+    <button class="btn btn-primary" ng-click="getProductCountByCategory()">Click</button>
+    <button class="btn btn-primary" ng-click="getAveragePricec()">Click2</button>
  
 </body>
 
