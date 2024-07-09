@@ -1,10 +1,11 @@
 var dashboard = angular.module("dashboardApp", []);
+
 dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
 
-    $scope.pie_array = {}
-    
+
 
     $scope.getProductCountByCategory = function () {
+        $scope.pie_array = {}
         $http({
             method: 'POST',
             url: 'report_productCounts.php'
@@ -50,7 +51,7 @@ dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
                                 text: 'จำนวนสินค้าตามหมวดหมู่'
                             },
                             datalabels: {
-                               
+
                                 formatter: (context, args) => {
                                     return args.chart.data.labels[args.dataIndex]
                                 },
@@ -65,23 +66,22 @@ dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
 
                 });
             },
-            function () {}
+            function () { }
         )
 
     };
 
-
-    $scope.getAveragePricec = function () {
+    $scope.getAveragePriceProduct = function () {
         $scope.pie_array2 = {}
         $http({
             method: 'POST',
             url: 'report_priceAvg.php'
         }).then(
-            function successCallback(response){
-        
+            function successCallback(response) {
+
                 $scope.pie_array2 = response.data
-                $scope.category_name = $scope.pie_array2.map( (item)=> {return item.category_name; });
-                $scope.avg_price = $scope.pie_array2.map( (item)=> {return item.avg_price; });
+                $scope.category_name = $scope.pie_array2.map((item) => { return item.category_name; });
+                $scope.avg_price = $scope.pie_array2.map((item) => { return item.avg_price; });
 
                 var ctx = document.getElementById('myPieChart2').getContext('2d');
                 var myPieChart = new Chart(ctx, {
@@ -100,7 +100,7 @@ dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
                                 '#EDC949',
                                 '#AF7AA1'
                             ],
-                            data:  $scope.avg_price
+                            data: $scope.avg_price
                         }]
                     },
                     options: {
@@ -111,16 +111,9 @@ dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
                                 display: true,
                                 text: 'ราคาสินค้าเฉลี่ยแต่ละประเภท'
                             },
-                            datalabels: {
-                               
-                                formatter: (context, args) => {
-                                    return args.chart.data.labels[args.dataIndex]
-                                },
-                               
-                            }
                         }
                     },
-                   
+
 
                 });
 
@@ -132,4 +125,51 @@ dashboard.controller("dashboardCtrl", function ($scope, $http, $timeout) {
         )
     };
 
+    $scope.getHighPriceProduct = function () {
+        $scope.barChart_array = {}
+        $http({
+            method: 'POST',
+            url: 'report_priceMax.php'
+
+        }).then(
+            function successCallback(response) {
+
+                $scope.barChart_array = response.data;
+                $scope.category_name = $scope.barChart_array.map(function (item) { return item.category_name; });
+                $scope.max_price = $scope.barChart_array.map(function (item) { return item.max_price; });
+                var ctx = document.getElementById('myPieChart3').getContext('2d');
+
+                var barChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: $scope.category_name,
+                        datasets: [{
+                            label: 'ราคาสินค้าที่มากที่สุดแต่ละหมวด',
+                            data: $scope.max_price,
+                            backgroundColor: [
+                                '#4E79A7',
+                                '#F28E2B',
+                                '#E15759',
+                                '#76B7B2',
+                                '#59A14F',
+                                '#EDC949',
+                                '#AF7AA1'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            
+            },
+            function () { }
+        )
+
+    };
 });

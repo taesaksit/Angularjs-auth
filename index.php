@@ -30,19 +30,21 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
     <?php require 'navbar.php'; ?>
 
  
-    <div class="row shadow shadow p-3 mt-2">
+    <div class="row p-4  mt-5 shadow ">
   
-        <div class="col-md-12 "> 
+        <div class="col-md-4" ng-init="getProductCountByCategory()"> 
           <canvas id="myPieChart"  ></canvas>
         </div>      
-        <div class="col-md-12 "> 
+        <div class="col-md-4" ng-init="getAveragePriceProduct()"> 
           <canvas id="myPieChart2"  ></canvas>
+        </div>   
+        <div class="col-md-4 d-flex justify-content-center " ng-init="getHighPriceProduct()" > 
+          <canvas id="myPieChart3" ></canvas>
         </div>   
     </div>
 
-    <button class="btn btn-primary" ng-click="getProductCountByCategory()">Click</button>
-    <button class="btn btn-primary" ng-click="getAveragePricec()">Click2</button>
- 
+
+
 </body>
 
 </html>

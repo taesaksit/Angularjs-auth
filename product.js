@@ -6,7 +6,7 @@ product.controller("productCtrl", function ($scope, $http, $timeout) {
 
     var formProduct = new bootstrap.Modal(document.getElementById('formProduct'));
     var formProductEdit = new bootstrap.Modal(document.getElementById('formProductEdit'));
-    $scope.test = '@#'
+
     
 
     $scope.getCategory = function () {
@@ -115,21 +115,20 @@ product.controller("productCtrl", function ($scope, $http, $timeout) {
 
     $scope.editProduct = function (data) {
 
-
         if (data != undefined) {
+
             $scope.productUpdate.id = data.product_id;
             $scope.productUpdate.name = data.product_name;
             $scope.productUpdate.price = data.product_price;
             $scope.productUpdate.unit = data.product_unit;
             $scope.productUpdate.category = data.category_name;
             $scope.productUpdate.category = data.category;
-            console.log($scope.productUpdate);
             formProductEdit.show();
         }
 
         if (data == undefined) {
             formProductEdit.hide();
-            console.log($scope.productUpdate)
+
             $http({
                 method: "POST",
                 data: $scope.productUpdate,

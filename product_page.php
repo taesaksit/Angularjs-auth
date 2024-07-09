@@ -119,17 +119,18 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
                 </div>
                 <div class="modal-body">
                     <form class="" ng-submit="editProduct()">
+                        {{productUpdate.unit}}
                         <div class="mb-2">
                             <label for="" class="form-label">ProductName</label>
-                            <input class="form-control" type="text" required ng-modal="productUpdate.name" ng-value="productUpdate.name">
+                            <input class="form-control" type="text" required ng-model="productUpdate.name" >
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Price</label>
-                            <input class="form-control" type="number" min="1" required ng-modal="productUpdate.price" ng-value="productUpdate.price">
+                            <input class="form-control" type="number" min="1" required ng-model="productUpdate.price"  ng-value="productUpdate.price">
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Unit</label>
-                            <input class="form-control" type="number" min="1" required ng-modal="productUpdate.unit" ng-value="productUpdate.unit">
+                            <input class="form-control" type="number" min="1" required ng-model="productUpdate.unit" ng-value="productUpdate.unit" >
                         </div>
                         <div class="mb-2" ng-init="getCategory()">
                             <label for="" class="form-label">Category</label>

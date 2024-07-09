@@ -31,7 +31,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
 
     <?php require 'navbar.php'; ?>
 
-    <div class="row d-flex justify-content-center" ng-init="getCategory()">
+    <div class="row d-flex justify-content-center" >
         <div class="col-md-8">
             <form class="border mt-5 p-3" ng-submit="categorySubmit()">
                 <h4 class="">ADD Categories</h4>
@@ -45,7 +45,7 @@ if (!isset($_SESSION["username"]) && !isset($_SESSION['user_id'])) {
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-md-8">
                 <div class="table-responsive">
-                    <table id="dataTable" class="table table-hover table-striped" style="width:100%">
+                    <table id="dataTable" class="table table-hover table-striped" style="width:100%" ng-init="getCategory()">
                         <thead>
                             <tr>
                                 <th>CategoryID</th>

@@ -33,6 +33,7 @@ category.controller("categoryCtrl", function ($scope, $http, $timeout) {
     };
 
     $scope.categorySubmit = function () {
+
         $scope.category.name = $scope.category.name.replace(
             /[^\w\s\u0E00-\u0E7F]/gi,
             ""
@@ -70,11 +71,10 @@ category.controller("categoryCtrl", function ($scope, $http, $timeout) {
     };
 
     $scope.editCategory = function (data) {
-
+        console.log(data)
         if (data != undefined) {
             $scope.categoryUpdate.id = data.category_id;
             $scope.categoryUpdate.name = data.category_name;
-            console.log(data);
             formEditModal.show();
         }
 

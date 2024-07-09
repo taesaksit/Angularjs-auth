@@ -1,7 +1,6 @@
-<?Php
+<?php
+require 'condb.php';
 session_start();
-
-require("condb.php");
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -9,19 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header('location: indexlogin.php');
     exit();
 } else {
-    $sql = "SELECT * FROM categories";
-    $result = $conn->query($sql);
-    $product_type = [];
-    if ($result->num_rows > 0) {
+    $sql = "SELECT categories.category_name , max(product.product_price) AS max_price
+                    FROM product
+                    JOIN categories ON categories.category_id = product.category
+                    GROUP BY category_id";
 
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $product_type[] = $row;
+            $response[] = $row;
         }
-    }
-    else {
+    } else {
         $response['error'] = 'SQL have a problem!! ';
     }
 }
 
-echo json_encode($product_type);
+echo json_encode($response);
 $conn->close();
